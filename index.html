@@ -1,0 +1,92 @@
+<html>
+
+	<head>
+
+		<title> 
+
+			Menu 
+
+		</title>
+
+		<script src="https://simplycodingcourses.com/files/simplyjs/simply.js">
+
+		</script>
+
+		<script>
+
+			function start(){
+
+				sjs.open();
+
+				var menu_text = new sjs.Text("Red Flag",30,"blue");
+
+				menu_text.centerH();
+
+				var level1butt = new sjs.Button("Level 1",function(){
+
+					window.location = "level1.html"
+				});
+
+				
+				level1butt.center();
+
+				var mark_text = new sjs.Text("Game coded by Mark,A,Hoffman");
+
+				var level_text = new sjs.Text("Levels Made by Megan and Lauren Hoffman");
+
+				mark_text.bottom().centerH();
+
+				level_text.bottom().centerH().offset(0,-20);
+			
+
+			var radio = document.getElementsByName("game");
+
+			var selection = false;
+
+			var message = "";
+
+			for( var i = 0; i < radio.length; i++) {
+
+			   if(radio[i].value == "create") {
+
+			      selection = true;
+
+			   }; //end if statement
+
+			}; //end for loop
+
+			if(selection == true) {
+
+			window.location = message + "platform.html";
+
+			} else {
+			message = message + "<b><p style='color:red'>WRONG!!!!!!</p></b>";
+			}
+			document.getElementById("response").innerHTML = message;
+		}
+		</script>
+
+	</head>
+
+	<body onload="start()">
+
+		<h1> 
+
+			Red Flag Game MENU
+
+		</h1>
+
+		<div id="target" style="margin:auto;background:grey;">
+
+		</div>
+
+		 <input type="password" name="game" value="">password<BR>Only for enployes!!!
+
+            <br>
+            
+            <input id="bbackground" type="button" value="submit" onclick="start()">
+
+	</body>
+
+</html>
+
