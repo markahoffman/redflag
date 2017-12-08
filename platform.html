@@ -10,11 +10,15 @@
 
 		<script src="https://simplycodingcourses.com/files/simplyjs/simply.js">
 
+		<!-- this links to simply coding sjs links -->
+
 		</script>
 
 		<script>
 
 		var level = [];
+
+		//this is an aray
 
 			function start(){
 
@@ -27,6 +31,8 @@
 			var showbtn = new sjs.Button("show",function(){
 
 				alert(sjs.saveImageArray(level));
+
+				//this makes a pop up window open when the button is pressed and displays what ever is in level aray
 
 				console.log(sjs.saveImageArray(level));
 
@@ -78,6 +84,8 @@
 
 			"Images/r_walk-7.png"];
 
+			//this is giving all the right pics to make him move
+
 			var l_images = ["Images/l_walk-0.png",
 
 			"Images/l_walk-1.png",
@@ -94,17 +102,27 @@
 
 			"Images/l_walk-7.png"];
 
+			//this gives the left pics
+
 			var r_facing = true;
+
+			//this creats a variable called r_facing and sets it = to true
 
 			var r_track = 0;
 
+			//this creats a variable called r_track and sets it = to 0
+
 			var l_track = 0;
+
+			//this creats a variable called 1_track and sets it = to 0
 
 			sjs.keyDown(RIGHT_KEY, function(){
 
 			r_facing = true;
 
 			r_track = r_track + 1;
+
+			//this gives r_track + 1
 
 			player.pushRight(2);
 
@@ -115,7 +133,11 @@
 				r_track = 0;
 			}
 
+			//this is a if statment so that when r_track = 7 it will run and sets r_track back to 0
+
 			if(r_track >= 8){
+
+				//this adds a r_track 8
 
 				player.setImage("Images/r_jump.png");
 			}
@@ -128,6 +150,8 @@
 
 				l_track = l_track + 1;
 
+				//this adds 1 to l_track
+
 				player.pushLeft(2);
 
 				player.setImage(l_images[l_track]);
@@ -136,6 +160,8 @@
 
 					l_track = 0;
 				}
+
+				//this is a if statment so that when l_track = 7 it will run and sets l_track back to 0
 
 				if(l_track >= 8){
 
@@ -148,13 +174,19 @@
 
 			var canJump = true;
 
+			//this creats a variable canjump and sets it = to 0
+
 			sjs.keyDown(UP_KEY, function(){
 
 				if(canJump==true){
 
 					canJump = false;
 
+					//this sets canjump to false
+
 					player.pushUp(55);
+
+					//this pushes the player up
 
 					if(r_facing==true){
 
@@ -235,6 +267,8 @@
 
 						laser.moveTo(player.getX()+44,player.getY()+7);
 
+						//this moves the laser to the player
+
 						laser.pushRight(25.5);
 					} else {
 
@@ -246,6 +280,8 @@
 					setTimeout(function(){
 
 						canShoot = true;
+
+						//this sets can shoot to true 
 
 					},1500);
 				}
@@ -294,9 +330,13 @@
 
 					sjs.stoppedBy(x,y);
 
+					//this says if the enemy is above the platform if that is true stop the enemy on top
+
 				} else {
 
 					sjs.bounceOff(x,y);
+
+					//other wies bounce off
 
 				}
 			});
@@ -321,6 +361,8 @@
 
 				sjs.removeFromArray(level,y);
 
+				//this removes what ever is put into the trash from the aray
+
 			});
 
 			sjs.onHit(["block1","block2"],"bottom_screen",function(x,y){
@@ -340,7 +382,11 @@
 
 			trash.node.style.background = "blue";
 
+			//this gives the trash a blue backgrounds
+
 			trash.node.style.borderTop = "4px solid red";
+
+			//this gives thw trash a red 4px line on the top
 
 
 
@@ -353,6 +399,8 @@
 				var platform = new sjs.Image("Images/platform.png");
 
 				level.push(platform);
+
+				//this puts platform into the aray
 
 				platform.type = "platform";
 
@@ -496,7 +544,7 @@
 					});
 
 				}
-				//This is the lsft facing shooting bad guy dude.
+				//This is the left facing shooting bad guy dude.
 				function lidlebad() {
 
 					var lidlebad = new sjs.Image("Images/l_idle bad.png");
@@ -630,14 +678,6 @@
 
 						});
 
-						block2.onMouseUp(function(){
-
-						block2.unfollow(sjs.mouse);
-
-						block2.setGravity();
-
-					});
-
 					}
 
 					function block() {
@@ -746,761 +786,7 @@
 
 			<input type="image" src="Images/block2.png" onclick="block2()" class="image">
 
-		</center>
-
-		<div id="target" style="margin:auto;background:grey;">
-
-		</div>
-
-	</body>
-
-</html><html>
-
-	<head>
-
-		<title> 
-
-			Red Flag Game 
-
-		</title>
-
-		<script src="https://simplycodingcourses.com/files/simplyjs/simply.js">
-
-		</script>
-
-		<script>
-
-		var level = [];
-
-			function start(){
-
-			sjs.open("target",1200,675);
-
-			var background = new sjs.Image("Images/background.png");
-
-			background.setSize(5000,675)
-
-			var showbtn = new sjs.Button("show",function(){
-
-				alert(sjs.saveImageArray(level));
-
-				console.log(sjs.saveImageArray(level));
-
-			});
-
-			var testbtn = new sjs.Button("test level",function(){
-
-				localStorage.setItem('level',
-
-					sjs.saveImageArray(level));
-
-				window.open('test.html','_blank');
-
-			});
-
-			testbtn.moveTo(100,0);
-
-			//player properties
-
-			var player = new sjs.Image("Images/r_idle.png");
-
-			player.type = "player";
-
-			player.setSize(100,100);
-
-			player.setGravity(3);
-
-			player.bottom();
-
-			player.friction = .3;
-
-			player.noBounds = true;
-
-			sjs.scrollable(player,background);
-
-			var r_images = ["Images/r_walk-0.png",
-
-			"Images/r_walk-5.png",
-
-			"Images/r_walk-2.png",
-
-			"Images/r_walk-3.png",
-
-			"Images/r_walk-4.png",
-
-			"Images/r_walk-5.png",
-
-			"Images/r_walk-6.png",
-
-			"Images/r_walk-7.png"];
-
-			var l_images = ["Images/l_walk-0.png",
-
-			"Images/l_walk-1.png",
-
-			"Images/l_walk-2.png",
-
-			"Images/l_walk-3.png",
-
-			"Images/l_walk-4.png",
-
-			"Images/l_walk-5.png",
-
-			"Images/l_walk-6.png",
-
-			"Images/l_walk-7.png"];
-
-			var r_facing = true;
-
-			var r_track = 0;
-
-			var l_track = 0;
-
-			sjs.keyDown(RIGHT_KEY, function(){
-
-			r_facing = true;
-
-			r_track = r_track + 1;
-
-			player.pushRight(2);
-
-			player.setImage(r_images[r_track]);
-
-			if(r_track == 7){
-
-				r_track = 0;
-			}
-
-			if(r_track >= 8){
-
-				player.setImage("Images/r_jump.png");
-			}
-
-			});
-
-			sjs.keyDown(LEFT_KEY, function(){
-
-				r_facing = false;
-
-				l_track = l_track + 1;
-
-				player.pushLeft(2);
-
-				player.setImage(l_images[l_track]);
-
-				if(l_track == 7){
-
-					l_track = 0;
-				}
-
-				if(l_track >= 8){
-
-					player.setImage("Images/l_jump.png");
-				}
-
-			});
-
-			//Jumping code
-
-			var canJump = true;
-
-			sjs.keyDown(UP_KEY, function(){
-
-				if(canJump==true){
-
-					canJump = false;
-
-					player.pushUp(55);
-
-					if(r_facing==true){
-
-						player.setImage("Images/r_jump.png");
-
-						r_track = 8;
-
-					}
-
-					else{
-
-						player.setImage("Images/l_jump.png");
-
-						l_track = 8;
-
-					}
-				}
-			});
-
-			sjs.onHit("player","bottom_screen",function(x,y){
-
-				sjs.stoppedBy(x,y);
-
-				if(canJump == false){
-
-					canJump = true;
-
-					r_track = 0;
-
-					l_track = 0;
-				}
-
-			});
-
-			sjs.onHit("player",
-
-				["right_screen","left_screen","top_screen"],
-
-				function(x,y){sjs.stoppedBy(x);
-
-				});
-
-			window.addEventListener("keyup", function(e){
-
-				if(e.keyCode == RIGHT_KEY){
-
-					player.setImage("Images/r_idle.png");
-
-					r_track = 0;
-
-				} else if (e.keyCode == LEFT_KEY){
-
-					player.setImage("Images/l_idle.png");
-
-					l_track = 0;
-
-					}
-				
-			});
-
-			sjs.keyDown(DOWN_KEY, function(){
-
-				if(canShoot == true){
-
-					canShoot = false;
-
-					var laser = new sjs.Image("Images/laser.png");
-
-					laser.type = "laser";
-
-					laser.setSize(100,50);
-
-					laser.friction = 0;
-
-					laser.noBounds = true;
-
-					if(r_facing == true){
-
-						laser.moveTo(player.getX()+44,player.getY()+7);
-
-						laser.pushRight(25.5);
-					} else {
-
-						laser.moveTo(player.getX()+-60,player.getY()+7);
-
-						laser.pushLeft(25.5);
-					}
-
-					setTimeout(function(){
-
-						canShoot = true;
-
-					},1500);
-				}
-			});
-
-			//onHit blocks below
-
-			sjs.onHit("player","platform",function(x,y){
-
-				sjs.stoppedBy(x,y);
-
-				if (canJump == false){
-
-					canJump = true;
-
-					r_track = 0;
-
-					l_track = 0;
-				}
-
-			});
-
-			var canShoot = false;
-
-			sjs.onHit("player","powerUp",function(x,y){
-
-				canShoot = true;
-
-				y.destroy();
-
-			});
-
-			sjs.onHit("enemy","bottom_screen",function(x,y){
-
-				sjs.stoppedBy(x,y);
-			});
-
-			sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
-
-				sjs.bounceOff(x,y);
-			});
-
-			sjs.onHit("enemy","platform",function(x,y){
-
-				if(x.isAboveOf(y) == true){
-
-					sjs.stoppedBy(x,y);
-
-				} else {
-
-					sjs.bounceOff(x,y);
-
-				}
-			});
-
-			sjs.onHit("player","jump_pad", function(x,y){
-
-				if(x.isAboveOf(y) == true){
-
-					player.pushUp(50);
-
-				} else {
-
-					sjs.stoppedBy(x,y);
-
-				}
-				
-			});
-
-			sjs.onHit("trash",["jump_pad","enemy","flag","platform","score","powerUp","lidlebad","ridlebad","spike5","spike","rope","line","block1","block2","blackline"],function(x,y){
-
-				y.destroy();
-
-				sjs.removeFromArray(level,y);
-
-			});
-
-			sjs.onHit(["block1","block2"],"bottom_screen",function(x,y){
-
-				x.stop();
-			});
-
-			var trash = new sjs.Text("Trash",20,"black");
-
-			trash.type = "trash";
-
-			trash.moveTo(0,50) 
-
-			trash.fixed = true;
-
-			trash.setHeight(60);
-
-			trash.node.style.background = "blue";
-
-			trash.node.style.borderTop = "4px solid red";
-
-
-
-			}//end start function
-
-			//platform function
-
-			function platform(){
-
-				var platform = new sjs.Image("Images/platform.png");
-
-				level.push(platform);
-
-				platform.type = "platform";
-
-				platform.setHeight(30);
-
-				platform.center().offset(-sjs.gx,10);
-
-				platform.onMouseDown(function(){
-
-					platform.draggable();
-
-					platform.follow(sjs.mouse);
-				});
-
-			}
-
-				function powerUp(){
-
-					var powerUp = new sjs.Image("Images/power_up.png");
-
-					level.push(powerUp);
-
-					powerUp.type = "powerUp";
-
-					powerUp.setHeight(30);
-
-					powerUp.center().offset(-sjs.gx,10);
-
-					powerUp.onMouseDown(function(){
-
-						powerUp.draggable();
-
-						powerUp.follow(sjs.mouse);
-
-					});
-
-					
-			
-				}
-
-				function score(){
-
-					var score = new sjs.Image("Images/score.gif");
-
-					level.push(score);
-
-					score.type = "score";
-
-					score.setHeight(30);
-
-					score.center().offset(-sjs.gx,10);
-
-					score.onMouseDown(function(){
-
-						score.draggable();
-
-						score.follow(sjs.mouse);
-
-					});
-
-
-				}
-
-				function flag(){
-
-					var flag = new sjs.Image("Images/flag_bad.png");
-
-					level.push(flag);
-
-					flag.type = "flag";
-
-					flag.setHeight(80);
-
-					flag.center().offset(-sjs.gx,10);
-
-					flag.onMouseDown(function(){
-
-						flag.draggable();
-
-						flag.follow(sjs.mouse);
-						
-					});
-				}
-
-				function enemy(){
-
-					var enemy = new sjs.Image("Images/r_enemy.gif");
-
-					level.push(enemy);
-
-					enemy.type = "enemy";
-
-					enemy.center().offset(-sjs.gx,10);
-
-					enemy.friction = 0;
-
-					enemy.noBounds = true;
-
-					enemy.setHFlipImages("Images/l_enemy.gif","Images/r_enemy.gif");
-
-					enemy.onMouseDown(function(){
-
-						enemy.follow(sjs.mouse);
-
-						enemy.removeGravity();
-
-						enemy.stop();
-					});
-
-					enemy.onMouseUp(function(){
-
-						enemy.unfollow(sjs.mouse);
-
-						enemy.setGravity();
-
-						enemy.pushHFacing();
-
-						enemy.accel = .5;
-					});
-
-				}
-
-				function jumpPad() {
-
-					var jump_pad = new sjs.Image("Images/jump_pad.png");
-
-					level.push(jump_pad);
-
-					jump_pad.type = "jump_pad";
-
-					jump_pad.center().offset(-sjs.gx,10);
-
-					jump_pad.setHeight(15);
-
-					jump_pad.onMouseDown(function(){
-
-						jump_pad.draggable();
-
-						jump_pad.follow(sjs.mouse);
-
-					});
-
-				}
-				//This is the lsft facing shooting bad guy dude.
-				function lidlebad() {
-
-					var lidlebad = new sjs.Image("Images/l_idle bad.png");
-
-					level.push(lidlebad);
-
-					lidlebad.type = "lidlebad";
-
-					lidlebad.center().offset(-sjs.gx,10);
-
-					lidlebad.setHeight(100);
-
-					lidlebad.onMouseDown(function(){
-
-						lidlebad.draggable();
-
-						lidlebad.follow(sjs.mouse);
-
-					});
-
-				}
-				//This is the right facing shooting bad guy dude.
-				function ridlebad() {
-
-					var ridlebad = new sjs.Image("Images/r_idle bad.png");
-
-					level.push(ridlebad);
-
-					ridlebad.type = "ridlebad";
-
-					ridlebad.center().offset(-sjs.gx,10);
-
-					ridlebad.setHeight(100);
-
-					ridlebad.onMouseDown(function(){
-
-						ridlebad.draggable();
-
-						ridlebad.follow(sjs.mouse);
-
-						ridlebad.removeGravity();
-
-					});
-
-				}
-
-					function spike() {
-
-						var spike = new sjs.Image("Images/Steel_Spike.png");
-
-					level.push(spike);
-
-					spike.type = "spike";
-
-					spike.center().offset(-sjs.gx,10);
-
-					spike.setHeight(50);
-
-					spike.onMouseDown(function(){
-
-						spike.draggable();
-
-						spike.follow(sjs.mouse);
-
-					});
-
-					}
-
-					function spike5() {
-
-						var spike5 = new sjs.Image("Images/Spike5.png");
-
-					level.push(spike5);
-
-					spike5.type = "spike5";
-
-					spike5.center().offset(-sjs.gx,10);
-
-					spike5.setHeight(50);
-
-					spike5.onMouseDown(function(){
-
-						spike5.draggable();
-
-						spike5.follow(sjs.mouse);
-
-					});
-
-					}
-
-					function rope() {
-
-						var rope = new sjs.Image("Images/rope.png");
-
-						level.push(rope);
-
-						rope.type = "rope";
-
-						rope.center().offset(-sjs.gx,10);
-
-						rope.setHeight(150);
-
-						rope.onMouseDown(function(){
-
-							rope.draggable();
-
-							rope.follow(sjs.mouse);
-
-						});
-					}
-
-					function blackline() {
-
-						var line = new sjs.Image("Images/black line.png");
-
-						level.push(line);
-
-						line.type = "line";
-
-						line.center().offset(-sjs.gx,10);
-
-						line.setHeight(0);
-
-						line.noBounds = true;
-
-						line.onMouseDown(function(){
-
-							line.draggable();
-
-							line.follow(sjs.mouse);
-
-						});
-
-						block2.onMouseUp(function(){
-
-						block2.unfollow(sjs.mouse);
-
-						block2.setGravity();
-
-					});
-
-					}
-
-					function block() {
-
-						var block1 = new sjs.Image("Images/block.png");
-
-						level.push(block1);
-
-						block1.type = "block1";
-
-						block1.center().offset(-sjs.gx,10);
-
-						block1.setSize(150,150);
-
-						block1.noBounds = true;
-
-						block1.onMouseDown(function(){
-
-							block1.draggable();
-
-							block1.follow(sjs.mouse);
-
-						});
-
-						
-
-					}
-
-					function block2() {
-
-						var block2 = new sjs.Image("Images/block2.png");
-
-						level.push(block2);
-
-						block2.type = "block2";
-
-						block2.center().offset(-sjs.gx,10);
-
-						block2.setSize(150,150);
-
-						block2.noBounds = true;
-
-						block2.onMouseDown(function(){
-
-							block2.draggable();
-
-							block2.follow(sjs.mouse);
-
-						});
-
-						
-
-
-					}
-		</script>
-
-		<style>	
-
-		.image{
-
-			height:78px;
-
-			margin:2px;
-
-		}
-
-		</style>
-
-	</head>
-
-	<body onload="start()">
-
-		<h1> 
-
-			Red Flag Game 
-
-		</h1>
-
-		<center>
-
-			<input type="image" src="Images/platform.png" onclick="platform()" class="image">
-
-			<input type="image" src="Images/power_up.png" onclick="powerUp()" class="image">
-
-			<input type="image" src="Images/score.gif" onclick="score()" class="image">
-
-			<input type="image" src="Images/flag_bad.png" onclick="flag()" class="image">
-
-			<input type="image" src="Images/r_enemy.gif" onclick="enemy()" class="image">
-
-			<input type="image" src="Images/jump_pad.png" onclick="jumpPad()" class="image">
-
-			<input type="image" src="Images/l_idle bad.png" onclick="lidlebad()" class="image">
-
-			<input type="image" src="Images/r_idle bad.png" onclick="ridlebad()" class="image">
-
-			<input type="image" src="Images/Steel_Spike.png" onclick="spike()" class="image">
-
-			<input type="image" src="Images/Spike5.png" onclick="spike5()" class="image">
-
-			<input type="image" src="Images/rope.png" onclick="rope()" class="image">
-
-			<input type="image" src="Images/black line.png" onclick="blackline()" class="image">
-
-			<input type="image" src="Images/block.png" onclick="block()" class="image">
-
-			<input type="image" src="Images/block2.png" onclick="block2()" class="image">
+			<!--these are all the images on the top of the screen ond allows you to click on them which runs the java script code-->
 
 		</center>
 
